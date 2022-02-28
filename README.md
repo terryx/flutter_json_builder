@@ -11,4 +11,13 @@ Flutter Json Builder is a desktop app to help developers to convert json respons
 2. Install the package located in `build` folder. 
 3. Paste a json response from an API contract into the text field and click the build icon to convert the model.
 
+### Input Sample ###
+
+![Input Sample](./input_sample.png)
+
+
+### Output Sample ###
+
+![Output Sample](./output_sample.png)
+
 
