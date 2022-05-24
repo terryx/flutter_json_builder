@@ -1,16 +1,27 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_json_builder/modules/dart_model_maker.dart' as model_maker;
+import 'package:flutter_json_builder/modules/dart_model_maker.dart'
+    as model_maker;
 
 class JsonBuilder with ChangeNotifier, DiagnosticableTreeMixin {
   String output = '';
 
   void save(String values) {
-    final Map<String, dynamic> data = jsonDecode(values);
-    model_maker.etch(data);
-    output = model_maker.models.join('\n');
+    try {
+      final Map<String, dynamic> data = jsonDecode(values);
+      _clear();
+      model_maker.etch(data);
+      output = model_maker.models.join('\n');
+    } catch (_) {
+      _clear();
+    } finally {
+      notifyListeners();
+    }
+  }
 
-    notifyListeners();
+  void _clear() {
+    model_maker.models.clear();
+    output = '';
   }
 }
